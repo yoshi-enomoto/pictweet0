@@ -48,3 +48,10 @@ end
 gem 'devise'
 gem 'haml-rails'
 gem 'erb2haml'
+# This is a small gem which causes rails console to open pry.
+gem 'pry-rails'
+# リセットcssなどのファイルを自前で用意しなくて良い
+# Change your application.css to application.css.scss or application.css.sass and then @import compass and your own stylesheets to your hearts content.
+gem 'compass-rails','~> 2.0'
+# Provides Sprockets implementation for Rails 4.x (and beyond) Asset Pipeline.
+gem 'sprockets', '2.11.0'
