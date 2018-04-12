@@ -14,8 +14,11 @@
 ActiveRecord::Schema.define(version: 20180405121532) do
 
   create_table "tweets", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",       limit: 255
+    t.text     "text",       limit: 65535
+    t.text     "image",      limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
