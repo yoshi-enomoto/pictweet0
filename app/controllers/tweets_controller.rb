@@ -22,9 +22,13 @@ class TweetsController < ApplicationController
     # Tweet.create(name: "aiko", image: "http://s3.aiko.s3.amazonaws.com/wordpress/wp-content/uploads/2018/04/tsujo_s.jpeg", text: "お前の送信ボタンは効力を効かない！")
 
     # 下記、ストパラ設定前の保存方法
-    # Tweet.create(name: params[:name], image: params[:image], text: params[:text])
+      # Tweet.create(name: params[:name], image: params[:image], text: params[:text])
     # 下記、ストパラ設定後の保存方法
-    Tweet.create(tweet_params)
+      # Tweet.create(tweet_params)
+    # 下記、ツイート時にcurrent_userの名前を付加保存する
+    # （ストパラ以外の項目を保存する必要がある為、書き換える）
+    # 引数の形は『(カラム名: 保存する値, カラム名: 保存する値, …)』
+    Tweet.create(name: tweet_params[:name], image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
   end
 
   private
