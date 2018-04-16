@@ -55,3 +55,6 @@ gem 'pry-rails'
 gem 'compass-rails','~> 2.0'
 # Provides Sprockets implementation for Rails 4.x (and beyond) Asset Pipeline.
 gem 'sprockets', '2.11.0'
+# ページネーションの導入
+gem 'kaminari'
+

@@ -1,0 +1,10 @@
+.contents.row
+  = form_tag "/tweets/#{@tweet.id}", method: :patch do
+    -# 『SENT』を押した際のリクエスト先。
+    %h3 編集する
+    = label_tag :image, "Image Url", class: "try"
+    = text_field_tag :image, "#{@tweet.image}", placeholder: "画像のリンク先"
+
+    = label_tag :text, "paragraph"
+    = text_area_tag :text, "#{@tweet.text}", placeholder: "一言文章", cols: "30", rows: "10"
+    = submit_tag "SENT"

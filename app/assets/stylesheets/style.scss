@@ -222,6 +222,9 @@ div.contents.row {
   }
   .new_user{
   font-family: "游ゴシック", "YuGothic";
+    .left_side {
+      width: 3%;
+    }
   }
   div.content_post {
     @include boxBase(20px 0 ,30px);
