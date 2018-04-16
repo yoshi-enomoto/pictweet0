@@ -35,6 +35,7 @@
                 %li
                   =link_to "マイページ", "/users/#{current_user.id}"
                   / =link_to "マイページ", user_path(current_user.id)：この方式の書き方は現在まだ不明（pathが生成されていない？）
+                  / =link_to "マイページ", user_path(params[:id])
                   =link_to "ログアウト", destroy_user_session_path, method: :delete
             %a.post{:href => "/tweets/new"} 投稿する
         -else

@@ -5,12 +5,22 @@
     .content_post{style: "background-image: url(#{tweet.image});"}
       -# 下記でもOK（ハッシュロケット記述？）
       -# .content_post{:style => "background-image: url(#{tweet.image});"}
-      = simple_format(tweet.text)
+      -if user_signed_in? && current_user.id == tweet.user_id
+        -# 前者がないと、未ログイン時『current_user』が『nil』となり、エラーになる。
+        .more
+          %span
+            = image_tag "arrow_top.png"
+          %ul.more_list
+            %li
+              = link_to "削除", "/tweets/#{tweet.id}", method: :delete
+              -# each内なので、『tweet.id』でそれぞれが取れる。
+        = simple_format(tweet.text)
       %span.name<>
-        投稿者
-        %br
-        #{tweet.user.nickname}
-      -# %span.name=tweet.name：アソシエーションを組む前の記述の仕方
+        = link_to "/users/#{tweet.user_id}", html: "" do
+          %span 投稿者
+          #{tweet.user.nickname}
+          -# 『link_to(url, html_options = {}) do』を参照
+        -# %span.name=tweet.name：アソシエーションを組む前の記述の仕方
 
   =paginate(@tweets)
   -# 初期設定のままでは、設定数以上のレコードがないと、この部分が表示されない。

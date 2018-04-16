@@ -6,7 +6,7 @@ class TweetsController < ApplicationController
   def index
     # 下記だけではレコード内の各カラムを表示するという都合の良い取り出しは出来ない為、
     # 更にview側で『.カラム名』とする必要がある。
-    @tweet = Tweet.find(1)
+      # @tweet = Tweet.find(1)
 
     # 同様に下記で取り出すには、view側でeachで回す
     # @tweets = Tweet.all
@@ -33,6 +33,11 @@ class TweetsController < ApplicationController
       # Tweet.create(name: tweet_params[:name], image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
     # 下記、不要カラム削除後の保存
     Tweet.create(image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+  end
+
+  def destroy
+    tweet = Tweet.find(params[:id])
+    tweet.destroy if tweet.user.id == current_user.id
   end
 
   private
