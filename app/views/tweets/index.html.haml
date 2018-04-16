@@ -12,6 +12,8 @@
             = image_tag "arrow_top.png"
           %ul.more_list
             %li
+              = link_to "編集", "/tweets/#{tweet.id}/edit"
+            %li
               = link_to "削除", "/tweets/#{tweet.id}", method: :delete
               -# each内なので、『tweet.id』でそれぞれが取れる。
         = simple_format(tweet.text)

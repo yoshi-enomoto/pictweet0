@@ -36,8 +36,23 @@ class TweetsController < ApplicationController
   end
 
   def destroy
+    # 『params[:id]』で選択したtweetのidを取得出来る。（選択送信時のリクエストに値が入る）
     tweet = Tweet.find(params[:id])
+    # ログインユーザーと取得したツイートのユーザーの一致確認
     tweet.destroy if tweet.user.id == current_user.id
+  end
+
+  def edit
+    # 『params[:id]』で選択したtweetのidを取得出来る。
+    @tweet = Tweet.find(params[:id])
+  end
+
+  def update
+    # 『params[:id]』で選択したtweetのidを取得、
+    tweet = Tweet.find(params[:id])
+    # その後、フォームから入力された値を更新する
+    # ログインユーザーと取得したツイートのユーザーの一致確認
+    tweet.update(tweet_params) if tweet.user.id == current_user.id
   end
 
   private
