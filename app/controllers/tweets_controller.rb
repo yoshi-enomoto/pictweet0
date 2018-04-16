@@ -11,7 +11,9 @@ class TweetsController < ApplicationController
     # 同様に下記で取り出すには、view側でeachで回す
     # @tweets = Tweet.all
     # @tweets = Tweet.order("created_at DESC")   #『order』メソッドは『all』を省略可能
-    @tweets = Tweet.order("created_at DESC").page(params[:page]).per(5)
+    # @tweets = Tweet.order("created_at DESC").page(params[:page]).per(5)
+    # 『n+1』問題の対処
+    @tweets = Tweet.includes(:user).order("created_at DESC").page(params[:page]).per(5)
   end
 
   def new
@@ -28,12 +30,17 @@ class TweetsController < ApplicationController
     # 下記、ツイート時にcurrent_userの名前を付加保存する
     # （ストパラ以外の項目を保存する必要がある為、書き換える）
     # 引数の形は『(カラム名: 保存する値, カラム名: 保存する値, …)』
-    Tweet.create(name: tweet_params[:name], image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+      # Tweet.create(name: tweet_params[:name], image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+    # 下記、不要カラム削除後の保存
+    Tweet.create(image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
   end
 
   private
   def tweet_params
-    params.permit(:name, :image, :text)
+    # 不要カラム削除前のストパラ
+      # params.permit(:name, :image, :text)
+    # 不要カラム削除後のストパラ
+    params.permit(:image, :text)
   end
 
   # 記述の際、unlessをつけるには『,』が不要

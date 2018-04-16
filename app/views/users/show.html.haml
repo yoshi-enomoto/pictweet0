@@ -8,6 +8,10 @@
   -@tweets.each do |tweet|
     .content_post{style: "background-image: url(#{tweet.image});"}
       = simple_format(tweet.text)
-      %span.name=tweet.name
+      -#
+        %span.name
+          投稿者#{tweet.user.nickname}：不要カラム削除後に整理
+          （マイページに投稿者：自分を表示する必要がない為）
+      -# %span.name=tweet.name：アソシエーションを組む前の記述の仕方
 
   =paginate(@tweets)

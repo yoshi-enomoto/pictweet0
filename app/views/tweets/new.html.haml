@@ -5,14 +5,16 @@
     / →コントローラー側に対応するアクションがあれば、それで送信可能。
     / かつ、そのアクションで好きな値を保存させることも可能。
     %h3 投稿する
-    =label_tag :name, "Nickname", class: "try"
-    / 『forの値』,『html上の文章』,第３引数以降にクラス名などを追記可能？
-    =text_field_tag :name, "", placeholder: "あなたの名前"
+    -# カラムを削除した為
+    -# =label_tag :name, "Nickname"
+    -# =text_field_tag :name, "", placeholder: "あなたの名前"
+
+    =label_tag :image, "Image Url", class: "try"
+    / 『forの値』,『html上の文章（テキスト）』,第３引数以降にクラス名などを追記可能？
+    =text_field_tag :image, "", placeholder: "画像のリンク先"
     / 『nameの値』（同時にidの値）,『valueの値』,placeholoderは第３以降に追記可能。
     / htmlの『name属性値』がカラム名へと紐付く（キーとなる）
     / idはcssを充てる場合などに使用。
-    =label_tag :image, "Image Url"
-    =text_field_tag :image, "", placeholder: "画像のリンク先"
     =label_tag :text, "paragraph"
     =text_area_tag :text, "", placeholder: "一言文章", cols: "30", rows: "10"
     =submit_tag "SENT"
@@ -23,7 +25,8 @@
   = form_tag('/tweets', method: :post) do
     %h3
       投稿する
-    %input{name: "name", placeholder: "Nickname", type: "text"}
+    -# カラムを削除した為
+    -# %input{name: "name", placeholder: "Nickname", type: "text"}
     %input{name: "image", placeholder: "Image Url", type: "text"}
     %textarea{cols: "30", name: "text", placeholder: "text", rows: "10"}
     %input{type: "submit", value: "SENT"}

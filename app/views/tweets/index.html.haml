@@ -6,17 +6,22 @@
       -# 下記でもOK（ハッシュロケット記述？）
       -# .content_post{:style => "background-image: url(#{tweet.image});"}
       = simple_format(tweet.text)
-      %span.name=tweet.name
+      %span.name<>
+        投稿者
+        %br
+        #{tweet.user.nickname}
+      -# %span.name=tweet.name：アソシエーションを組む前の記述の仕方
 
   =paginate(@tweets)
   -# 初期設定のままでは、設定数以上のレコードがないと、この部分が表示されない。
 
-単体表示
-%br
-  =@tweet.name
-  =@tweet.text
-  #{@tweet.text}
-  =@tweet.image
-%br
-レコード全ての表示
-%br
+-#
+  単体表示（不要カラム削除した為、全てコメアウト中）
+  %br
+    =@tweet.name
+    =@tweet.text
+    #{@tweet.text}
+    =@tweet.image
+  %br
+  レコード全ての表示
+  %br
