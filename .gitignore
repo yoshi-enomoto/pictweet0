@@ -11,3 +11,9 @@
 /log/*
 !/log/.keep
 /tmp
+
+app/assets/javascripts/tweets.coffee
+
+test/controllers/tweets_controller_test.rb
+
+test/models/tweet_test.rb

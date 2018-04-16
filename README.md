@@ -8,7 +8,7 @@
 - コメント機能
 
 
-#Structure of DataBase
+# Structure of DataBase
 
 ## Usersテーブル
 |Column|Type|Options|
