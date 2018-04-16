@@ -5,18 +5,20 @@
     .content_post{style: "background-image: url(#{tweet.image});"}
       -# 下記でもOK（ハッシュロケット記述？）
       -# .content_post{:style => "background-image: url(#{tweet.image});"}
-      -if user_signed_in? && current_user.id == tweet.user_id
-        -# 前者がないと、未ログイン時『current_user』が『nil』となり、エラーになる。
-        .more
-          %span
-            = image_tag "arrow_top.png"
-          %ul.more_list
+      .more
+        %span
+          = image_tag "arrow_top.png"
+        %ul.more_list
+          %li
+            = link_to "詳細", "/tweets/#{tweet.id}"
+          -if user_signed_in? && current_user.id == tweet.user_id
+            -# 前者がないと、未ログイン時『current_user』が『nil』となり、エラーになる。
             %li
               = link_to "編集", "/tweets/#{tweet.id}/edit"
             %li
               = link_to "削除", "/tweets/#{tweet.id}", method: :delete
               -# each内なので、『tweet.id』でそれぞれが取れる。
-        = simple_format(tweet.text)
+      = simple_format(tweet.text)
       %span.name<>
         = link_to "/users/#{tweet.user_id}", html: "" do
           %span 投稿者
