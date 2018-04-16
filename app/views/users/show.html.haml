@@ -1,0 +1,13 @@
+.contents.row
+  %p
+    -# 表示パターン１：テキスト内での式展開の仕方
+    #{@nickname}さんの投稿一覧
+    -# 表示パターン２：式展開とテキストを分ける
+    -# = @nickname
+    -# さんの投稿一覧
+  -@tweets.each do |tweet|
+    .content_post{style: "background-image: url(#{tweet.image});"}
+      = simple_format(tweet.text)
+      %span.name=tweet.name
+
+  =paginate(@tweets)

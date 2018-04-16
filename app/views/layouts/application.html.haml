@@ -26,7 +26,16 @@
           %a{:href => "/"} PicTweet0
         -if user_signed_in?
           .user_nav.grid-6
-            =link_to "ログアウト", destroy_user_session_path, method: :delete
+            %span
+              -# 表示パターン１：
+              -# #{current_user.nickname}
+              -# 表示パターン２：
+              =current_user.nickname
+              %ul.user__info
+                %li
+                  =link_to "マイページ", "/users/#{current_user.id}"
+                  / =link_to "マイページ", user_path(current_user.id)：この方式の書き方は現在まだ不明（pathが生成されていない？）
+                  =link_to "ログアウト", destroy_user_session_path, method: :delete
             %a.post{:href => "/tweets/new"} 投稿する
         -else
           .grid-6

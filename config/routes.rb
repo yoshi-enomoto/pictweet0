@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   devise_for :users
   root "tweets#index"   #ルートパスの設定
     resources :tweets
+  get "users/:id" => "users#show"   #mypageへのルーティング
+  # パスの一部をコントローラにパラメーターというハッシュ形式で値を送る事ができます。
+  # コントローラ内でparams[:id]と記述することにすれば
+  # /users/:idの:id部分の情報を使用することができます。
+  # ->『application.haml』内の『"/users/#{current_user.id}"』からバリューを取得している
+
+  # ※下記の様に『/:id』を『/:user_id』と変更すると、キーが変更される。
+  # get "users/:user_id" => "users#show"   #mypageへのルーティング
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
