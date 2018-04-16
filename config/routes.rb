@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "tweets#index"   #ルートパスの設定
     resources :tweets
 

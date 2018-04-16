@@ -23,10 +23,16 @@
     %header.header
       .header__bar.row
         %h1.grid-6
-          %a{:href => "/"} PicTweet
-        .user_nav.grid-6
-          %a.post{:href => "/tweets/new"} 投稿する
+          %a{:href => "/"} PicTweet0
+        -if user_signed_in?
+          .user_nav.grid-6
+            =link_to "ログアウト", destroy_user_session_path, method: :delete
+            %a.post{:href => "/tweets/new"} 投稿する
+        -else
+          .grid-6
+            =link_to "ログイン", user_session_path, class: "post"
+            =link_to "新規登録", new_user_registration_path, class: "post"
     = yield
     %footer
       %p
-        Copyright PicTweet 2014.
+        Copyright xoxo 2018.

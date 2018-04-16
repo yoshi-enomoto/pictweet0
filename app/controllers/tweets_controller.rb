@@ -1,5 +1,8 @@
 class TweetsController < ApplicationController
 
+  # 記述の際、except,onlyをつけるには『,』が必要
+  before_action :move_to_index, except: :index
+
   def index
     # 下記だけではレコード内の各カラムを表示するという都合の良い取り出しは出来ない為、
     # 更にview側で『.カラム名』とする必要がある。
@@ -29,4 +32,8 @@ class TweetsController < ApplicationController
     params.permit(:name, :image, :text)
   end
 
+  # 記述の際、unlessをつけるには『,』が不要
+  def move_to_index
+    redirect_to action: :inex unless user_signed_in?
+  end
 end
