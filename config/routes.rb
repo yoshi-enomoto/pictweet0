@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root "tweets#index"   #ルートパスの設定
     resources :tweets
 
   # The priority is based upon order of creation: first created -> highest priority.

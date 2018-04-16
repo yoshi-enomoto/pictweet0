@@ -1,14 +1,15 @@
 .contents.row
   -@tweets.each do |tweet|
-    / 通常記述時にstyleを反映させる書き方（クラス名と{の間にスペース不要）
-    / ""間でruby式使用する場合は『=tweet.image』ではNG
+    -# 通常記述時にstyleを反映させる書き方（クラス名と{の間にスペース不要）
+    -# ""間でruby式使用する場合は『=tweet.image』ではNG
     .content_post{style: "background-image: url(#{tweet.image});"}
-      / 下記でもOK（ハッシュロケット記述？）
-      / .content_post{:style => "background-image: url(#{tweet.image});"}
+      -# 下記でもOK（ハッシュロケット記述？）
+      -# .content_post{:style => "background-image: url(#{tweet.image});"}
       = simple_format(tweet.text)
       %span.name=tweet.name
 
-
+  =paginate(@tweets)
+  -# 初期設定のままでは、設定数以上のレコードがないと、この部分が表示されない。
 
 単体表示
 %br

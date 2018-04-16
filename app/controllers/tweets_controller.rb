@@ -6,7 +6,9 @@ class TweetsController < ApplicationController
     @tweet = Tweet.find(1)
 
     # 同様に下記で取り出すには、view側でeachで回す
-    @tweets = Tweet.all
+    # @tweets = Tweet.all
+    # @tweets = Tweet.order("created_at DESC")   #『order』メソッドは『all』を省略可能
+    @tweets = Tweet.order("created_at DESC").page(params[:page]).per(5)
   end
 
   def new
