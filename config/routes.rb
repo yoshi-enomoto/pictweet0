@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root "tweets#index"   #ルートパスの設定
   resources :tweets do
     resources :comments, only: [:create]
+    # ネストをさせると、関連元のレコードのidをparamsへ容易に追加でき、コントローラに送れる
   end
   resources :users, only: [:show]
 
