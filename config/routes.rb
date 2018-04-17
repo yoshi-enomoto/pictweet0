@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     # ネストをさせると、関連元のレコードのidをparamsへ容易に追加でき、コントローラに送れる
   end
   resources :users, only: [:show]
+  resources :details
 
 
 

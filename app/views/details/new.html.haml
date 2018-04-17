@@ -1,0 +1,22 @@
+.contents.row
+  .container
+    -# form_forメソッドで、コントローラで生成した空のインスタンス変数を引数にして呼び出す。
+    = form_for @detail do |f|
+      =f.label :body, "自己紹介文"
+      =f.text_area :body, cols: "30", rows: "10"
+
+      =f.label :gender, "性別"
+      =f.select :gender, Detail.genders.keys.to_a
+      -# モデルで定義したenumのkeyを表す
+
+      =f.label :birthday, "誕生日"
+      =f.date_select :birthday, start_year: 1980, end_year: Date.today.year
+      -# 『start_year』と『end_year』で選択可能な年度の範囲を指定。
+
+      =f.label :hometown, "居住地", class: "try"
+      / 『forの値』,『html上の文章（テキスト）』,第３引数以降にクラス名などを追記可能？
+      =f.text_field :hometown
+
+      =f.submit "SENT"
+
+
