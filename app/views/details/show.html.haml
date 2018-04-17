@@ -5,17 +5,19 @@
       %tr
         %th 名前
         %th 性別
-        %th 生年月日
+        %th 年齢
         %th 出身
+        %th 自己紹介文
     %tbody
       - @details.each do |detail|
         %tr
-          / %td
-          /   = link_to current_user.nickname, user_path(user)
+          %td
+            = detail.user.nickname
           %td
             = detail.gender
           %td
-            = detail.birthday
+            #{calculate_age(detail.birthday)}歳
           %td
             = detail.hometown
-            #{calculate_age(detail.birthday)}歳
+          %td
+            = detail.body

@@ -211,6 +211,14 @@ header.header {
   }
 }
 div.contents.row {
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+  p {
+    position: relative;
+  }
   h2 {
     @include boxBase(20px 0, 0);
     font-weight: normal;
@@ -412,6 +420,15 @@ footer {
     text-align: center;
   }
 }
+// オリジナル追加
 .ng-hide {
   display: none;
+}
+.content_left {
+  text-align: center;
+  a {
+    &:hover {
+      color: #57C3E9;
+    }
+  }
 }
