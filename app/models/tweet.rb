@@ -3,4 +3,6 @@ class Tweet < ActiveRecord::Base
   belongs_to :user
   # 紐付く『所属するクラス名_id』が設定されている。
   has_many   :comments
+
+  validates :text, :image , presence: true
 end
