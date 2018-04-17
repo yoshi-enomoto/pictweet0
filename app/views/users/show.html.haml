@@ -1,6 +1,10 @@
 .contents.row
-  %p.content_left
-    = link_to "#{@nickname}さんのプロフィール", "/users/#{@user.id}/details/#{@user.detail.id}"
+  - if @user.detail.present?
+    %p.content_left
+      = link_to "#{@nickname}さんのプロフィール", "/users/#{@user.id}/details/#{@user.detail.id}"
+  - else
+    %p.content_left
+      = link_to "#{@nickname}さんのプロフィール", "/users/#{@user.id}/details/profile"
   %p
     -# 表示パターン１：テキスト内での式展開の仕方
     #{@nickname}さんの投稿一覧

@@ -6,7 +6,12 @@ Rails.application.routes.draw do
     # ネストをさせると、関連元のレコードのidをparamsへ容易に追加でき、コントローラに送れる
   end
   resources :users, only: [:show] do
-    resources :details
+    resources :details do
+      # idを必要としない場合（必要とする場合は『member』）
+      collection do
+        get "profile"   #プロフィール未入力時用ページ
+      end
+    end
   end
 
 
