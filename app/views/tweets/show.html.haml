@@ -24,10 +24,24 @@
         -#
            上記の様に記載することで、paramsの中にコメントと結びつくtweetのidが追加され、
            コントローラー側で容易に取得が可能。
+        -# = form_tag tweet_comments_path(@tweet.id), method: :post do：これでも可能
+        -# 下記の様に記述すれば、コメントの行き先は固定になる。
         -# = form_tag "/tweets/8/comments", method: :post do
-        -# = form_tag tweet_comments_path, method: :post
         = label_tag :text, "コメント入力欄"
         = text_area_tag :text, "", placeholder: "コメントする", cols: "30", rows: "2"
         = submit_tag "SENT"
 
-  / コメント入力欄
+    / コメント表示欄
+    .comments
+      %h4 コメント一覧
+      - if @comments
+        -# コメントがあれば下記表示可能
+        - @comments.each do |comment|
+          %p
+            %strong
+              =link_to "#{comment.user.nickname}", "/users/#{comment.user_id}"
+              ：
+              -#
+                 既にincludesメソッドでDBからレコードを取得しているので、
+                 『comment.user』を記述してもN+1問題は発生しない。
+              =comment.text

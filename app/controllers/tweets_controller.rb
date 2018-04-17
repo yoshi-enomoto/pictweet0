@@ -57,6 +57,11 @@ class TweetsController < ApplicationController
 
   def show
     @tweet = Tweet.find(params[:id])
+    # 上記を用いて関連した commentを取り出す
+    # アソシエーションが組まれていることから、『@tweet.comments』とすることで、
+    # 関連したコメント全てが取得できる。
+    # ユーザーのレコードを取得する際、N+1問題が発生するので『includes』を使う。
+    @comments = @tweet.comments.includes(:user)
   end
 
   private
