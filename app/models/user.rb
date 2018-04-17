@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :tweets
   # 所属側のテーブルに『所属するクラス名_id』カラムが存在している事。
   # 所属側（tweets）に『所属するクラス名（user）_id』カラムがある。
+  has_many :comments
 end
