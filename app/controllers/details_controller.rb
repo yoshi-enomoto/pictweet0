@@ -16,6 +16,7 @@ class DetailsController < ApplicationController
   end
 
   def show
+    @details = Detail.all
   end
 
   private
