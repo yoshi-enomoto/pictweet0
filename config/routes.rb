@@ -1,15 +1,32 @@
 Rails.application.routes.draw do
   devise_for :users
   root "tweets#index"   #ルートパスの設定
-    resources :tweets
-  get "users/:id" => "users#show"   #mypageへのルーティング
-  # パスの一部をコントローラにパラメーターというハッシュ形式で値を送る事ができます。
-  # コントローラ内でparams[:id]と記述することにすれば
-  # /users/:idの:id部分の情報を使用することができます。
-  # ->『application.haml』内の『"/users/#{current_user.id}"』からバリューを取得している
+  resources :tweets do
+    resources :comments, only: [:create]
+    # ネストをさせると、関連元のレコードのidをparamsへ容易に追加でき、コントローラに送れる
+  end
+  resources :users, only: [:show]
 
-  # ※下記の様に『/:id』を『/:user_id』と変更すると、キーが変更される。
-  # get "users/:user_id" => "users#show"   #mypageへのルーティング
+
+
+    # get "users/:id" => "users#show"   #mypageへのルーティング
+    # パスの一部をコントローラにパラメーターというハッシュ形式で値を送る事ができます。
+    # コントローラ内でparams[:id]と記述することにすれば
+    # /users/:idの:id部分の情報を使用することができます。
+    # ->『application.haml』内の『"/users/#{current_user.id}"』からバリューを取得している
+
+    # ※下記の様に『/:id』を『/:user_id』と変更すると、キーが変更される。
+    # get "users/:user_id" => "users#show"   #mypageへのルーティング
+
+      # Railsのリソースの7つのアクション 役割
+      # index   リソースの一覧を表示する。
+      # show    リソースの内容を表示する。
+      # new     リソースを追加する。
+      # create  リソースを追加し、作成する。
+      # edit    リソースを更新するためのフォームを表示する。
+      # update  リソースを更新する。
+      # destroy リソースを削除する。
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,47 @@
+.contents.row
+  .content_post{style: "background-image: url(#{@tweet.image});"}
+    - if user_signed_in? && current_user.id == @tweet.user_id
+      .more
+        %span
+          = image_tag "arrow_top.png"
+        %ul.more_list
+          %li
+            = link_to "編集", "/tweets/#{@tweet.id}/edit", method: :get
+          %li
+            = link_to "削除", "/tweets/#{@tweet.id}", method: :delete
+    = simple_format(@tweet.text)
+    %span.name
+      = link_to "/users/#{@tweet.user.id}", html: "" do
+        -# 『link_to(url, html_options = {}) do』を参照
+        %span 投稿者
+        =@tweet.user.nickname
+
+  / コメント入力欄
+  .container
+    - if current_user
+      -# ログインしていれば下記表示可能
+      = form_tag "/tweets/#{@tweet.id}/comments", method: :post do
+        -#
+           上記の様に記載することで、paramsの中にコメントと結びつくtweetのidが追加され、
+           コントローラー側で容易に取得が可能。
+        -# = form_tag tweet_comments_path(@tweet.id), method: :post do：これでも可能
+        -# 下記の様に記述すれば、コメントの行き先は固定になる。
+        -# = form_tag "/tweets/8/comments", method: :post do
+        = label_tag :text, "コメント入力欄"
+        = text_area_tag :text, "", placeholder: "コメントする", cols: "30", rows: "2"
+        = submit_tag "SENT"
+
+    / コメント表示欄
+    .comments
+      %h4 ＜コメント一覧＞
+      - if @comments
+        -# コメントがあれば下記表示可能
+        - @comments.each do |comment|
+          %p
+            %strong
+              =link_to "#{comment.user.nickname}", "/users/#{comment.user_id}"
+              ：
+              -#
+                 既にincludesメソッドでDBからレコードを取得しているので、
+                 『comment.user』を記述してもN+1問題は発生しない。
+              =comment.text
