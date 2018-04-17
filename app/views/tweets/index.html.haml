@@ -1,31 +1,10 @@
 .contents.row
   -@tweets.each do |tweet|
-    -# 通常記述時にstyleを反映させる書き方（クラス名と{の間にスペース不要）
-    -# ""間でruby式使用する場合は『=tweet.image』ではNG
-    .content_post{style: "background-image: url(#{tweet.image});"}
-      -# 下記でもOK（ハッシュロケット記述？）
-      -# .content_post{:style => "background-image: url(#{tweet.image});"}
-      .more
-        %span
-          = image_tag "arrow_top.png"
-        %ul.more_list
-          %li
-            = link_to "詳細", "/tweets/#{tweet.id}"
-          -if user_signed_in? && current_user.id == tweet.user_id
-            -# 前者がないと、未ログイン時『current_user』が『nil』となり、エラーになる。
-            %li
-              = link_to "編集", "/tweets/#{tweet.id}/edit"
-            %li
-              = link_to "削除", "/tweets/#{tweet.id}", method: :delete
-              -# each内なので、『tweet.id』でそれぞれが取れる。
-      = simple_format(tweet.text)
-      %span.name<>
-        = link_to "/users/#{tweet.user_id}", html: "" do
-          %span 投稿者
-          #{tweet.user.nickname}
-          -# 『link_to(url, html_options = {}) do』を参照
-        -# %span.name=tweet.name：アソシエーションを組む前の記述の仕方
-
+    = render partial: "tweet", locals: { tweet: tweet}
+    -#
+       左側：部分テンプレート内の変数名（送り先）
+       右側：その変数に何を代入するか。（送り元）
+       今回の場合、eachメソッドで回したインスタンス変数tweetを代入。
   =paginate(@tweets)
   -# 初期設定のままでは、設定数以上のレコードがないと、この部分が表示されない。
 
