@@ -1,0 +1,25 @@
+/ コミュニケーション欄
+- if @detail.present?
+  .container
+    - if current_user
+      = form_tag "/users/#{@detail.user_id}/details/#{@detail.id}/posts", method: :post do
+        = label_tag :text, "コミュニケーション欄"
+        = text_area_tag :text, "", placeholder: "書き込む", cols: "30", rows: "2"
+        = submit_tag "SENT"
+
+    / 書き込み表示欄
+    .comments
+      %h4 ＜書き込み一覧＞
+      - if @posts
+        - @posts.each do |post|
+          %p
+            %strong
+              =link_to "#{post.user.nickname}", "/users/#{post.user_id}"
+              ：
+              =post.text
+
+- elsif current_user.id == @user.id
+  .container
+    プロフィール詳細を登録すると、
+    %br
+    コミュニケーション欄が使用できるようになります！

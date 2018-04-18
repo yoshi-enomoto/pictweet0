@@ -20,9 +20,21 @@
       =text_area_tag :text, "", placeholder: "一言文章", cols: "30", rows: "10"
       =submit_tag "SENT"
 
+-# 上記、見比べ様（『ng-hide』により非表示中）
+.contents.row.ng-hide
+  .container
+    = form_tag tweets_path, method: :post, class: "try" do
+      %h3 投稿する
 
--# 下記、元々の例
-.contents.row
+      =label_tag :image, "Image Url", class: "try"
+      =text_field_tag :image, "", placeholder: "画像のリンク先"
+      =label_tag :text, "paragraph"
+      =text_area_tag :text, "", placeholder: "一言文章", cols: "30", rows: "10"
+      =submit_tag "SENT"
+
+
+-# 下記、元々の例（『ng-hide』により非表示中）
+.contents.row.ng-hide
   = form_tag('/tweets', method: :post) do
     %h3
       投稿する

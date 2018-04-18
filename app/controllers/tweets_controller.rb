@@ -20,19 +20,32 @@ class TweetsController < ApplicationController
   end
 
   def create
-    # web上からこのアクションが発火されれば、下記実行（＝入力問わず、下記のみがDBへ保存される）
-    # Tweet.create(name: "aiko", image: "http://s3.aiko.s3.amazonaws.com/wordpress/wp-content/uploads/2018/04/tsujo_s.jpeg", text: "お前の送信ボタンは効力を効かない！")
+      # web上からこのアクションが発火されれば、下記実行（＝入力問わず、下記のみがDBへ保存される）
+      # Tweet.create(name: "aiko", image: "http://s3.aiko.s3.amazonaws.com/wordpress/wp-content/uploads/2018/04/tsujo_s.jpeg", text: "お前の送信ボタンは効力を効かない！")
 
-    # 下記、ストパラ設定前の保存方法
-      # Tweet.create(name: params[:name], image: params[:image], text: params[:text])
-    # 下記、ストパラ設定後の保存方法
-      # Tweet.create(tweet_params)
-    # 下記、ツイート時にcurrent_userの名前を付加保存する
-    # （ストパラ以外の項目を保存する必要がある為、書き換える）
-    # 引数の形は『(カラム名: 保存する値, カラム名: 保存する値, …)』
-      # Tweet.create(name: tweet_params[:name], image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+      # 下記、ストパラ設定前の保存方法
+        # Tweet.create(name: params[:name], image: params[:image], text: params[:text])
+      # 下記、ストパラ設定後の保存方法
+        # Tweet.create(tweet_params)
+      # 下記、ツイート時にcurrent_userの名前を付加保存する
+      # （ストパラ以外の項目を保存する必要がある為、書き換える）
+      # 引数の形は『(カラム名: 保存する値, カラム名: 保存する値, …)』
+        # Tweet.create(name: tweet_params[:name], image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
     # 下記、不要カラム削除後の保存
-    Tweet.create(image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+    # Tweet.create(image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+
+    # バリデートを発動させるために、保存の仕方を変更
+    @tweet = Tweet.new(image: tweet_params[:image], text: tweet_params[:text], user_id: current_user.id)
+
+    #モデルのバリデートに引っかかった場合に表示させるページを指定
+    # 条件文でも、記述があれば処理として実行される様子
+    # 下記の『save』が発動する。
+    unless @tweet.save
+      render "error"
+      # render "/users/show"
+      # render "/users/#{current_user.id}"
+    end
+
   end
 
   def destroy
@@ -74,6 +87,6 @@ class TweetsController < ApplicationController
 
   # 記述の際、unlessをつけるには『,』が不要
   def move_to_index
-    redirect_to action: :inex unless user_signed_in?
+    redirect_to action: :index unless user_signed_in?
   end
 end

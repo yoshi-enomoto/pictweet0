@@ -5,8 +5,16 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
     # ネストをさせると、関連元のレコードのidをparamsへ容易に追加でき、コントローラに送れる
   end
-  resources :users, only: [:show]
-
+  resources :users, only: [:show] do
+    resources :details, except: [:index, :destroy] do
+      # idを必要としない場合（必要とする場合は『member』）
+      collection do
+        get "profile"   #プロフィール未入力時用ページ
+      end
+      resources :posts, only: [:create] do
+      end
+    end
+  end
 
 
     # get "users/:id" => "users#show"   #mypageへのルーティング

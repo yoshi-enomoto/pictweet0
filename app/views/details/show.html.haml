@@ -1,0 +1,28 @@
+.contents.row
+  .container
+    %h4
+      <名前>
+    %p
+      = @detail.user.nickname
+    %h4
+      <性別>
+    %p
+      = @detail.gender
+    %h4
+      <年齢>
+    %p
+      #{calculate_age(@detail.birthday)}歳
+    %h4
+      <出身地>
+    %p
+      = @detail.hometown
+    %h4
+      <自己紹介文>
+    =simple_format(@detail.body)
+    -# DBでの改行を反映させる為、『simple_format』メソッドを使用
+
+  - if current_user.id == @detail.user_id
+    .success
+      = link_to "プロフィール詳細を編集する", "/users/#{@detail.user_id}/details/#{@detail.id}/edit", method: :get, class: "btn"
+
+  = render partial: "post"
