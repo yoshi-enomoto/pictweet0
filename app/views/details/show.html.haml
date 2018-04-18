@@ -21,4 +21,5 @@
         %td
           = @detail.body
 
-/ 『編集』ボタンの追加（curret_user == user なら）
+  - if current_user.id == @detail.user_id
+    = link_to "プロフィール詳細を編集する", "/users/#{@detail.user_id}/details/#{@detail.id}/edit", method: :get, class: "btn"
