@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       collection do
         get "profile"   #プロフィール未入力時用ページ
       end
+      resources :posts, only: [:create] do
+      end
     end
   end
 
