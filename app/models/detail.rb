@@ -6,5 +6,5 @@ class Detail < ActiveRecord::Base
 
   # I reference user.：私側は相手先のidを持つ。
   belongs_to :user
-
+  has_many   :posts
 end
