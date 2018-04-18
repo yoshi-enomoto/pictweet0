@@ -23,6 +23,19 @@ class DetailsController < ApplicationController
     # １レコードのみなら、.カラム名で取り出せる。
   end
 
+  def edit
+    # 『params[:id]』で選択したdetailのidを取得出来る。
+    @detail = Detail.find(params[:id])
+    @user = User.find(params[:user_id])
+  end
+
+  def update
+    # ビューから受け取ったパラメータからidを元に、レコードを取得する。
+    @detail = Detail.find(params[:id])
+    # 『update』メソッドを利用してレコードの値を更新。
+    @detail.update(detail_params)
+  end
+
   private
   def detail_params
     # params（フォーム的なの）で送られてくるもののみ。
