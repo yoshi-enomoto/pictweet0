@@ -18,7 +18,9 @@ class DetailsController < ApplicationController
   end
 
   def show
-    @details = Detail.all
+    @detail = Detail.find(params[:id])
+    # ビュー側で『each』を使用するのは、複数のレコードが入った場合。
+    # １レコードのみなら、.カラム名で取り出せる。
   end
 
   private

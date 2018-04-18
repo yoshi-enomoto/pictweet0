@@ -9,15 +9,16 @@
         %th 出身
         %th 自己紹介文
     %tbody
-      - @details.each do |detail|
-        %tr
-          %td
-            = detail.user.nickname
-          %td
-            = detail.gender
-          %td
-            #{calculate_age(detail.birthday)}歳
-          %td
-            = detail.hometown
-          %td
-            = detail.body
+      %tr
+        %td
+          = @detail.user.nickname
+        %td
+          = @detail.gender
+        %td
+          #{calculate_age(@detail.birthday)}歳
+        %td
+          = @detail.hometown
+        %td
+          = @detail.body
+
+/ 『編集』ボタンの追加（curret_user == user なら）
