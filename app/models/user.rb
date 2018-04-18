@@ -13,4 +13,5 @@ class User < ActiveRecord::Base
 
   # One user references me.：belongs_to側が相手を参照している。
   has_one  :detail
+  has_many :posts
 end
