@@ -36,11 +36,14 @@ class DetailsController < ApplicationController
     @detail.update(detail_params)
   end
 
+  def profile
+    @user =User.find(params[:user_id])
+  end
+
   private
   def detail_params
     # params（フォーム的なの）で送られてくるもののみ。
     # ネスト後、『merge』メソッドで『user_id』を追加保存
     params.require(:detail).permit(:body, :gender, :birthday, :hometown).merge(user_id: params[:user_id])
   end
-
 end
