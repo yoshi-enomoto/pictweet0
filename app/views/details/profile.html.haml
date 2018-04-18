@@ -1,5 +1,5 @@
 .contents.row
   .success
     %h3 まだプロフィール詳細は登録されてません。
-    - if @user.detail.present?
+    - if @user.detail.nil? && current_user.id == @user.id
       = link_to "プロフィール詳細を登録する", new_user_detail_path, class: "btn"

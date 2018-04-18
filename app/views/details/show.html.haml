@@ -1,25 +1,25 @@
-%h1 ユーザー一覧
-.profile_list
-  %table
-    %theader
-      %tr
-        %th 名前
-        %th 性別
-        %th 年齢
-        %th 出身
-        %th 自己紹介文
-    %tbody
-      %tr
-        %td
-          = @detail.user.nickname
-        %td
-          = @detail.gender
-        %td
-          #{calculate_age(@detail.birthday)}歳
-        %td
-          = @detail.hometown
-        %td
-          = @detail.body
+.contents.row
+  .container
+    %h4
+      <名前>
+    %p
+      = @detail.user.nickname
+    %h4
+      <性別>
+    %p
+      = @detail.gender
+    %h4
+      <年齢>
+    %p
+      #{calculate_age(@detail.birthday)}歳
+    %h4
+      <出身地>
+    %p
+      = @detail.hometown
+    %h4
+      <自己紹介文>
+    =simple_format(@detail.body)
 
   - if current_user.id == @detail.user_id
-    = link_to "プロフィール詳細を編集する", "/users/#{@detail.user_id}/details/#{@detail.id}/edit", method: :get, class: "btn"
+    .success
+      = link_to "プロフィール詳細を編集する", "/users/#{@detail.user_id}/details/#{@detail.id}/edit", method: :get, class: "btn"
