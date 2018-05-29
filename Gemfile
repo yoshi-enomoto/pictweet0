@@ -45,6 +45,11 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  #ダミーデータを作成するためのgem
+  gem "faker"
+end
+
 gem 'devise'
 gem 'haml-rails'
 gem 'erb2haml'
