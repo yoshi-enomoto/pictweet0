@@ -22,6 +22,21 @@ describe TweetsController do
     end
   end
 
+  describe ' GET #index' do
+    it "populates an array of tweets ordered by created_at DESC" do
+      tweets = create_list(:tweet, 3)
+      get :index
+      # expect(assigns(:tweets)).to match(:tweets)   # 並び替え記述無し
+      expect(assigns(:tweets)).to match(tweets.sort{ |a, b| b.created_at <=> a.created_at })   # 並び替え記述有り
+      # ブロック引数aとbについて、『.created_at』で取り出した値を比較。+,-の符号判定する。
+      # 『b <=> a』で降順、その逆で昇順の並び替えとなる。
+    end
+
+    it "renders the :index template" do
+      get :index
+      expect(response).to render_template :index
+    end
+  end
 
   # describe 'HTTPメソッド名 #アクション名' do
   #   it "インスタンス変数は期待した値になるか？" do
