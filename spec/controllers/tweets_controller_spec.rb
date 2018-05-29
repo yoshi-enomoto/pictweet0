@@ -38,6 +38,20 @@ describe TweetsController do
     end
   end
 
+  describe ' GET #show' do
+    it "assigns the requested tweet to @tweet" do
+      tweet = create(:tweet)
+      get :show, id: tweet
+      expect(assigns(:tweet)).to eq tweet
+    end
+
+    it "renders the :show template" do
+      tweet = create(:tweet)
+      get :show, id: tweet
+      expect(response).to render_template :show
+    end
+  end
+
   # describe 'HTTPメソッド名 #アクション名' do
   #   it "インスタンス変数は期待した値になるか？" do
   #   "擬似的にリクエストを行ったことにするコードを書く"
