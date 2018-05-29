@@ -58,4 +58,5 @@ gem 'sprockets', '2.11.0'
 # ページネーションの導入
 gem 'kaminari'
 gem 'rspec-rails'
+gem 'factory_girl_rails', "~> 4.4.1"
 
