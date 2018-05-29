@@ -45,6 +45,11 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  #ダミーデータを作成するためのgem
+  gem "faker"
+end
+
 gem 'devise'
 gem 'haml-rails'
 gem 'erb2haml'
@@ -57,4 +62,6 @@ gem 'compass-rails','~> 2.0'
 gem 'sprockets', '2.11.0'
 # ページネーションの導入
 gem 'kaminari'
+gem 'rspec-rails'
+gem 'factory_girl_rails', "~> 4.4.1"
 

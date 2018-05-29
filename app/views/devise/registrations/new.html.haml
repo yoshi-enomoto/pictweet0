@@ -7,7 +7,9 @@
       = f.label :nickname
       %em (6 characters maximum)
       %br/
-      = f.text_field :nickname, autofocus: true, maxlength: "6"
+      = f.text_field :nickname, autofocus: true
+      -# = f.text_field :nickname, autofocus: true, maxlength: "6"
+      -# ：『rspec』実施の為に属性の削除
     -#新規で追加箇所
     .field
       = f.label :email
@@ -15,6 +17,9 @@
       = f.email_field :email, autofocus: true, autocomplete: "email"
     .field
       = f.label :password
+      %em
+        (#{@minimum_password_length} characters minimum)
+      -#
       - if @validatable
         -#- if @minimum_password_length：初期記載
         %em
