@@ -47,7 +47,7 @@
 ## Commentsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|body|text|null: false|
+|text|text|null: false|
 |tweet_id|integer|null: false, foreign_key: true|
 
 ### Association

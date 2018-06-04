@@ -9,13 +9,26 @@ class CommentsController < ApplicationController
       # ストパラ設定後・リダイレクト設定前
       # Comment.create(text: comment_params[:text], tweet_id: comment_params[:tweet_id], user_id: current_user.id)
 
-    # リダイレクト設定後
-    @comment = Comment.create(text: comment_params[:text], tweet_id: comment_params[:tweet_id], user_id: current_user.id)
+    # # リダイレクト設定後
+    # @comment = Comment.create(text: comment_params[:text], tweet_id: comment_params[:tweet_id], user_id: current_user.id)
 
-    # コメントと結びつくツイート詳細画面に遷移させる。
-    # そのために、このアクション内で使用した値から、関連物を取り出す。
-    redirect_to "/tweets/#{@comment.tweet.id}"
-    # redirect_to tweet_path()?
+    # # コメントと結びつくツイート詳細画面に遷移させる。
+    # # そのために、このアクション内で使用した値から、関連物を取り出す。
+    # redirect_to "/tweets/#{@comment.tweet.id}"
+    # # redirect_to tweet_path()?
+
+    # コメント入力欄に対してのバリデート設定後のアクション、リファクタリング
+    @comment = Comment.new(text: comment_params[:text], tweet_id: comment_params[:tweet_id], user_id: current_user.id)
+
+    if @comment.save
+      respond_to do |format|
+        format.html { redirect_to "/tweets/#{@comment.tweet.id}" }
+        # 引数を渡さないことで、jbuilderでjsに返すデータを作成する。
+        format.json
+      end
+    else
+      render "error"
+    end
   end
 
   private

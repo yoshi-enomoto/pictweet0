@@ -20,7 +20,7 @@
   .container
     - if current_user
       -# ログインしていれば下記表示可能
-      = form_tag "/tweets/#{@tweet.id}/comments", method: :post do
+      = form_tag "/tweets/#{@tweet.id}/comments", id: "new_comment", method: :post do
         -#
            上記の様に記載することで、paramsの中にコメントと結びつくtweetのidが追加され、
            コントローラー側で容易に取得が可能。
@@ -28,7 +28,7 @@
         -# 下記の様に記述すれば、コメントの行き先は固定になる。
         -# = form_tag "/tweets/8/comments", method: :post do
         = label_tag :text, "コメント入力欄"
-        = text_area_tag :text, "", placeholder: "コメントする", cols: "30", rows: "2"
+        = text_area_tag :text, "", placeholder: "コメントする", class: "textbox", cols: "30", rows: "2"
         = submit_tag "SENT"
 
     / コメント表示欄
