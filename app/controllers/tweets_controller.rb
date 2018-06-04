@@ -1,7 +1,7 @@
 class TweetsController < ApplicationController
 
   # 記述の際、except,onlyをつけるには『,』が必要
-  # before_action :move_to_index, except: :index
+  before_action :move_to_index, except: :index
 
   def index
     # 下記だけではレコード内の各カラムを表示するという都合の良い取り出しは出来ない為、
