@@ -21,7 +21,11 @@ class CommentsController < ApplicationController
     @comment = Comment.new(text: comment_params[:text], tweet_id: comment_params[:tweet_id], user_id: current_user.id)
 
     if @comment.save
-      redirect_to "/tweets/#{@comment.tweet.id}"
+      respond_to do |format|
+        format.html { redirect_to "/tweets/#{@comment.tweet.id}" }
+        # 引数を渡さないことで、jbuilderでjsに返すデータを作成する。
+        format.json
+      end
     else
       render "error"
     end
