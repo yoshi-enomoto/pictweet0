@@ -17,6 +17,8 @@ $(function() {
     var formData = new FormData(this);
     // イベント内の『action』属性の値を取得する。そこが送り先のurlとなる為。
     var url = $(this).attr("action");
+    // 下記の記述でフルパス取得
+    // var href = window.location.href + '/comments'
     $.ajax({
       type: "post",
       url: url,
@@ -36,7 +38,9 @@ $(function() {
       // 入力フォームに空の値を入れる。
       $(".textbox").val("");
     })
+    // 非同期通信失敗時
     .fail(function() {
+      // コントローラで保存失敗時を設定していても、こちらの処理が現れる。=場合によってはどちらも現れる。
       alert("通信に失敗しました。");
     })
   });
