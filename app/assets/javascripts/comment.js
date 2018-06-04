@@ -19,9 +19,9 @@ $(function() {
     var url = $(this).attr("action");
     $.ajax({
       type: "post",
-      url : url,
+      url: url,
       data: formData,
-      dataType: "json"
+      dataType: "json",
       // 双方共に『false』で上書きを防ぐ。
       //クエリ文字列に変換する役割
       processData: false,
@@ -36,7 +36,7 @@ $(function() {
       // 入力フォームに空の値を入れる。
       $(".textbox").val("");
     })
-    .fail(fucntion() {
+    .fail(function() {
       alert("通信に失敗しました。");
     })
   });
