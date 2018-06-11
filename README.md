@@ -5,11 +5,11 @@
 ## 機能
 - 投稿機能
 - ユーザー登録機能
-- コメント機能
+- 投稿に対するコメント機能（非同期通信）
 
 ## 追加機能
 - ユーザープロフィール詳細投稿機能
-- ユーザープロフィールに他ユーザーからの書き込み機能
+- ユーザープロフィールに他ユーザーからの書き込み機能（非同期通信）
 
 ## 特記事項
 - 今回、外部キーを想定しているカラムはマイグレーションファイルでは特に設定せずに実行。
@@ -26,10 +26,12 @@
 |password|string|null: false|
 
 ### Association
-- has_many :tweets
-- has_many :comments
-- has_one  :detail
-- has_many :posts
+```
+has_many :tweets
+has_many :comments
+has_one  :detail
+has_many :posts
+```
 
 
 ## Tweetsテーブル
@@ -40,8 +42,10 @@
 |user_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :user
-- has_many :comments
+```
+belongs_to :user
+has_many :comments
+```
 
 
 ## Commentsテーブル
@@ -51,8 +55,10 @@
 |tweet_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :user
-- belongs_to :tweet
+```
+belongs_to :user
+belongs_to :tweet
+```
 
 
 ## Detailsテーブル
@@ -65,8 +71,10 @@
 |hometown|string||
 
 ### Association
-- belongs_to :user
-- has_many   :posts
+```
+belongs_to :user
+has_many   :posts
+```
 
 
 ## Postsテーブル
@@ -77,6 +85,8 @@
 |text|text||
 
 ### Association
-  belongs_to :user
-  belongs_to :detail
+```
+belongs_to :user
+belongs_to :detail
+```
 
