@@ -1,5 +1,15 @@
 $(document).on("turbolinks:load", function() {
 
+  function buildHTML(post) {
+    var html = `<p>
+                  <strong>
+                    <a href="/users/${post.user_id}">${post.user_nickname}</a>
+                    ：${post.text}
+                  </strong>
+                </p>`
+    return html;
+  }
+
   $("#communication_area").on("submit", function(e) {
     e.preventDefault();
     var formData = new FormData(this);
