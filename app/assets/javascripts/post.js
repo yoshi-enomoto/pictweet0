@@ -12,5 +12,12 @@ $(document).on("turbolinks:load", function() {
       processData: false,
       contentType: false
     })
+    // 非同期通信成功時
+    .done(function(data){
+    })
+    // 非同期通信失敗時
+    .fail(function() {
+      alert("コミュニケーション書き込み一覧への投稿が失敗しました。");
+    })
   });
 });
