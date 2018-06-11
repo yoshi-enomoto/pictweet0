@@ -2,7 +2,7 @@
 - if @detail.present?
   .container
     - if current_user
-      = form_tag "/users/#{@detail.user_id}/details/#{@detail.id}/posts", method: :post do
+      = form_tag "/users/#{@detail.user_id}/details/#{@detail.id}/posts", id: "communication_area", method: :post do
         = label_tag :text, "コミュニケーション欄"
         = text_area_tag :text, "", placeholder: "書き込む", cols: "30", rows: "2"
         = submit_tag "SENT"
