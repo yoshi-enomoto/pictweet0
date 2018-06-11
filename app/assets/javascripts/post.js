@@ -14,6 +14,9 @@ $(document).on("turbolinks:load", function() {
     })
     // 非同期通信成功時
     .done(function(data){
+      var html = buildHTML(data);
+      $(".comments").append(html);
+      $("#communication_area")[0].reset();
     })
     // 非同期通信失敗時
     .fail(function() {
